@@ -7,7 +7,9 @@ Laravel 5 package to integrate Laravel Queue to Gearman
 Start by creating a Queue script. This is the script gearman should run. Here is an example file you can use in app/Commands/QueueTest.php
 
 ```php
-<?php namespace App\Commands;
+<?php 
+
+namespace App\Commands;
 
 use App\Commands\Command;
 
@@ -20,14 +22,16 @@ class QueueTest extends Command implements SelfHandling, ShouldBeQueued {
 
 	use InteractsWithQueue, SerializesModels;
 
+    protected $data = [];
+
 	/**
 	 * Create a new command instance.
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct($data = [])
 	{
-		//
+		$this->data = $data;
 	}
 
 	/**
@@ -39,7 +43,7 @@ class QueueTest extends Command implements SelfHandling, ShouldBeQueued {
 	{
         \Log::error('Some error');
 
-        \Log::info('Some information');
+        \Log::info('Processing id: ' . $this->data['id']);
 	}
 }
 ```
@@ -47,7 +51,7 @@ class QueueTest extends Command implements SelfHandling, ShouldBeQueued {
 To run the command from your code use:
 
 ```php
-\Queue::push(new QueueTest());
+\Queue::push(new QueueTest(['id' => 1]));
 ```
 
 If you integrate other files in your QueueTest.php you can print output by using Laravel log handler.
