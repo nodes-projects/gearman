@@ -42,7 +42,6 @@ class GearmanJob extends Job implements JobContract {
             print "\n";
         });
 
-        $startTime = time();
         while($this->worker->work() || $this->worker->returnCode() == GEARMAN_TIMEOUT) {
 
         }
