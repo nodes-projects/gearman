@@ -61,3 +61,17 @@ If you integrate other files in your QueueTest.php you can print output by using
 ```
 
 This will be catched and outputtet in the queue:listen function.
+
+If you just want your command to run a function in a repository or other class. You can use NodesCommand
+
+Example
+```php
+\Queue::push(new NodesCommand([
+    'class' => 'Oxcept\Models\ChatUser\ChatUserRepository',
+    'action' => 'run',
+    'params' => [
+        'id' => 1,
+        'name' => 'Casper is cool'
+    ]
+]));
+```
