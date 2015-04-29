@@ -53,18 +53,9 @@ To run the command from your code use:
 ```php
 \Queue::push(new QueueTest(['id' => 1]));
 ```
-
-If you integrate other files in your QueueTest.php you can print output by using Laravel log handler.
-
-```php
-\Log::info('Information from another file');
-```
-
-This will be catched and outputtet in the queue:listen function.
-
 If you just want your command to run a function in a repository or other class. You can use NodesCommand
-
 Example
+
 ```php
 \Queue::push(new NodesCommand([
     'class' => 'Oxcept\Models\ChatUser\ChatUserRepository',
@@ -75,3 +66,11 @@ Example
     ]
 ]));
 ```
+
+If you integrate other files in your QueueTest.php you can print output by using Laravel log handler.
+
+```php
+\Log::info('Information from another file');
+```
+
+This will be catched and outputtet in the queue:listen function.
