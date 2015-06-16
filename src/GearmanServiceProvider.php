@@ -2,6 +2,7 @@
 
 namespace NodesGearman;
 
+use Illuminate\Queue\Connectors\SyncConnector;
 use IlluminateQueueClosure;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Queue\Console\WorkCommand;
@@ -168,7 +169,7 @@ class GearmanServiceProvider extends ServiceProvider {
      */
     public function registerConnectors($manager)
     {
-        foreach (array('Null', 'Sync', 'Database', 'Beanstalkd', 'Redis', 'Sqs', 'Iron', 'Gearman') as $connector)
+        foreach (['Null', 'Sync', 'Database', 'Beanstalkd', 'Redis', 'Sqs', 'Iron', 'Gearman'] as $connector)
         {
             $this->{"register{$connector}Connector"}($manager);
         }
@@ -336,11 +337,11 @@ class GearmanServiceProvider extends ServiceProvider {
      */
     public function provides()
     {
-        return array(
+        return [
             'queue', 'queue.worker', 'queue.listener', 'queue.failer',
             'command.queue.work', 'command.queue.listen', 'command.queue.restart',
             'command.queue.subscribe', 'queue.connection',
-        );
+        ];
     }
 
 }
