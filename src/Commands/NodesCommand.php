@@ -10,6 +10,13 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 use Illuminate\Support\Facades\App;
 
+/**
+ * Class NodesCommand
+ * @author cr@nodes.dk
+ *
+ * @package NodesGearman
+ * @deprecated - Use the NodesCommand in the Nodes Laravel core
+ */
 class NodesCommand extends Command implements SelfHandling, ShouldBeQueued {
 
     use InteractsWithQueue, SerializesModels;
