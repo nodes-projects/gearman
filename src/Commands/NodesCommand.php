@@ -47,7 +47,7 @@ class NodesCommand extends Command implements SelfHandling, ShouldBeQueued {
             $result = App::make($this->data['class'])->$function($param);
             \Log::info('Done Processing NodesCommand with data: ' . json_encode($this->data) . ' result: ' . json_encode($result));
         } catch(\Exception $e) {
-            return \Log::error('Error Processing NodesCommand with data: ' . json_encode($this->data) . ' result: ' . $e->getMessage());
+            return \Log::error('Error Processing NodesCommand with data: ' . is_array($this->data) ? json_encode($this->data) : ' unknown ' . ' result: ' . $e->getMessage());
         }
 
     }
